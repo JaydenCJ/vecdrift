@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="640" viewBox="0 0 920 640" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14">
+  <!-- Terminal transcript of a real run against the example exports
+       (examples/generate_exports.py). Text is copied verbatim from an
+       actual execution; scripts/smoke.sh replays this exact scenario. -->
+  <rect width="920" height="640" rx="10" fill="#0d1117"/>
+  <rect width="920" height="34" rx="10" fill="#161b22"/>
+  <rect y="20" width="920" height="14" fill="#161b22"/>
+  <circle cx="22" cy="17" r="6" fill="#ff5f57"/>
+  <circle cx="42" cy="17" r="6" fill="#febc2e"/>
+  <circle cx="62" cy="17" r="6" fill="#28c840"/>
+  <text x="460" y="22" fill="#8b949e" text-anchor="middle" font-size="12">vecdrift — re-embed or not, before users notice</text>
+  <g fill="#c9d1d9">
+    <text x="24" y="62"><tspan fill="#7ee787">$</tspan> vecdrift snapshot model_v1.jsonl -o baseline.json --label model-v1</text>
+    <text x="24" y="86">baseline written: baseline.json (48 anchors, dim 8, 1128 pair similarities)</text>
+    <text x="24" y="122"><tspan fill="#7ee787">$</tspan> vecdrift compare baseline.json model_v2.jsonl</text>
+    <text x="24" y="146">vecdrift: model-v1 (48 anchors, dim 8) vs model_v2 (48 anchors, dim 8)</text>
+    <text x="24" y="170">pairwise geometry</text>
+    <text x="24" y="194">  similarity correlation (pearson)  : 1.0000</text>
+    <text x="24" y="218">  mean |delta similarity|           : 0.0010</text>
+    <text x="24" y="242">neighborhoods (k=10)</text>
+    <text x="24" y="266">  mean overlap@10  : 1.000</text>
+    <text x="24" y="290">verdict: <tspan fill="#7ee787">OK</tspan>   <tspan fill="#8b949e"># exit 0 — same geometry, keep the index</tspan></text>
+    <text x="24" y="330"><tspan fill="#7ee787">$</tspan> vecdrift compare baseline.json model_v3.jsonl</text>
+    <text x="24" y="354">vecdrift: model-v1 (48 anchors, dim 8) vs model_v3 (48 anchors, dim 12)</text>
+    <text x="24" y="378">pairwise geometry</text>
+    <text x="24" y="402">  similarity correlation (pearson)  : <tspan fill="#f85149">0.6513</tspan></text>
+    <text x="24" y="426">  max  |delta similarity|           : <tspan fill="#f85149">1.5849</tspan>  (doc-19 vs doc-31)</text>
+    <text x="24" y="450">neighborhoods (k=10)</text>
+    <text x="24" y="474">  mean overlap@10  : <tspan fill="#f85149">0.665</tspan></text>
+    <text x="24" y="498">worst anchors</text>
+    <text x="24" y="522">  doc-39   overlap 0.10   rank shift 21.9   mean |dsim| 0.5582</text>
+    <text x="24" y="546">  doc-11   overlap 0.10   rank shift 12.2   mean |dsim| 0.4607</text>
+    <text x="24" y="570">verdict: <tspan fill="#f85149">RE-EMBED</tspan>   <tspan fill="#8b949e"># exit 1 — recall will change, fail the deploy</tspan></text>
+    <text x="24" y="606" fill="#8b949e"># fully offline: exported vectors in, verdict out — no vector DB, no API calls</text>
+  </g>
+</svg>
